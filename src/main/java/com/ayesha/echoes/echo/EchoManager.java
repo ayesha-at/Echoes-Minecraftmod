@@ -112,9 +112,20 @@ public final class EchoManager {
      * The recording itself is then translated so its first frame lands here. */
     private Vec3 getSpawnPoint(AbstractClientPlayer player, EchoSnapshot start) {
         if (Minecraft.getInstance().hitResult instanceof BlockHitResult hit) {
+            // The Echo's position is its FEET position.  The old implementation
+            // added 0.36 blocks along the hit face, which made a top-face spawn
+            // visibly float above the ground and could make the replayed path
+            // miss the blocks it interacted with.
+            BlockPos block = hit.getBlockPos();
             Direction face = hit.getDirection();
-            Vec3 normal = new Vec3(face.getStepX(), face.getStepY(), face.getStepZ());
-            return hit.getLocation().add(normal.scale(0.36));
+
+            if (face == Direction.UP) {
+                return new Vec3(block.getX() + 0.5, block.getY() + 1.0, block.getZ() + 0.5);
+            }
+
+            // For side/bottom faces, spawn on the adjacent block when possible.
+            BlockPos adjacent = block.relative(face);
+            return new Vec3(adjacent.getX() + 0.5, adjacent.getY() + 1.0, adjacent.getZ() + 0.5);
         }
         return new Vec3(player.getX(), player.getY(), player.getZ());
     }

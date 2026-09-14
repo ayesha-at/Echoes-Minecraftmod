@@ -55,17 +55,10 @@ public class EchoEntity extends LivingEntity {
         EchoSnapshot snap = playback.getCurrentSnapshot();
         if (snap == null) { killEcho("empty recording"); return; }
 
+        // Echoes are replays, not physical mobs.  They should be able to pass
+        // through the world exactly as the original recording did, so a small
+        // collision/placement difference must not kill the replay.
         applySnapshot(snap);
-
-        if (!level().noCollision(this)) {
-            killEcho("blocked by the world");
-            return;
-        }
-
-        if (getY() < level().getMinY()) {
-            killEcho("fell into the void");
-            return;
-        }
 
         int tick = playback.getCurrentTick();
         if (tick != lastActionTick) {
@@ -81,30 +74,22 @@ public class EchoEntity extends LivingEntity {
         if (owner == null) { killEcho("owner unavailable"); return false; }
 
         BlockPos target = action.targetFrom(playback.getOriginBlock());
-        String currentBlockId = EchoAction.blockId(serverLevel.getBlockState(target));
-
-        if (!currentBlockId.equals(action.expectedBlockId)) {
-            killEcho("recorded world state no longer matches");
-            return false;
-        }
 
         if (action.type == EchoAction.Type.BREAK_BLOCK) {
+            // Forgiving interaction: if the recorded block has already been
+            // removed or changed, simply skip this action and keep replaying.
+            // The Echo should only die for a resource it genuinely needs.
             if (serverLevel.getBlockState(target).isAir()) {
-                killEcho("recorded block is already gone");
-                return false;
+                return true;
             }
-            if (!serverLevel.destroyBlock(target, true, owner)) {
-                killEcho("recorded block could not be broken");
-                return false;
-            }
+            serverLevel.destroyBlock(target, true, owner);
             return true;
         }
 
         if (action.type == EchoAction.Type.PLACE_BLOCK) {
             Item item = BuiltInRegistries.ITEM.getValue(Identifier.parse(action.itemId));
             if (!(item instanceof BlockItem blockItem)) {
-                killEcho("recorded block item is unavailable");
-                return false;
+                return true;
             }
 
             ItemStack resource = findInInventory(owner, item);
@@ -114,13 +99,14 @@ public class EchoEntity extends LivingEntity {
             }
 
             if (!serverLevel.getBlockState(target).canBeReplaced()) {
-                killEcho("recorded placement space is occupied");
-                return false;
+                // Another block/player may have changed the world since the
+                // recording. Skip the placement rather than killing the Echo.
+                return true;
             }
 
             if (!serverLevel.setBlock(target, blockItem.getBlock().defaultBlockState(), 3)) {
-                killEcho("recorded block could not be placed");
-                return false;
+                // Failed world interaction is non-fatal; the replay continues.
+                return true;
             }
             resource.shrink(1);
             owner.containerMenu.broadcastChanges();
