@@ -1,0 +1,25 @@
+{
+  "stats": {
+    "minecraft:picked_up": {
+      "minecraft:dirt": 7
+    },
+    "minecraft:custom": {
+      "minecraft:time_since_rest": 2042,
+      "minecraft:walk_one_cm": 7364,
+      "minecraft:total_world_time": 6566,
+      "minecraft:leave_game": 1,
+      "minecraft:play_time": 2042,
+      "minecraft:time_since_death": 2042
+    },
+    "minecraft:mined": {
+      "minecraft:fern": 1,
+      "minecraft:dirt": 3,
+      "minecraft:grass_block": 4,
+      "minecraft:large_fern": 2
+    },
+    "minecraft:used": {
+      "minecraft:dirt": 2
+    }
+  },
+  "DataVersion": 4903
+}

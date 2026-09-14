@@ -1,10 +1,13 @@
 package com.ayesha.echoes.echo;
 
 import com.ayesha.echoes.playback.EchoPlayback;
+import com.ayesha.echoes.recording.EchoAction;
 import com.ayesha.echoes.recording.EchoRecording;
 import com.ayesha.echoes.recording.EchoSnapshot;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -12,106 +15,158 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.Level;
 
+import java.util.UUID;
+
 public class EchoEntity extends LivingEntity {
-
     private static final double SECONDS_PER_TICK = 1.0 / EchoRecording.TICKS_PER_SECOND;
+    private static final Identifier ECHO_SKIN = Identifier.fromNamespaceAndPath("echoes", "textures/entity/echo.png");
 
-    private Identifier skinTexture;
-
-    /** Set once by EchoManager right after spawning. Null until then. */
     private EchoPlayback playback;
+    private UUID ownerUuid;
+    private int lastActionTick = -1;
 
     public EchoEntity(EntityType<? extends EchoEntity> type, Level level) {
         super(type, level);
-        // NOTE: noPhysics was here before and caused the entity to fall
-        // straight through the floor (it disables ALL block collision, not
-        // just player collision -- gravity still applies with nothing to
-        // stop it, so it free-fell until far enough below the world to get
-        // auto-discarded). Not needed for V1 anyway since walking through
-        // walls isn't in scope yet -- normal collision lets it stand on
-        // the ground like any other entity.
         this.setInvulnerable(true);
-        // Position is fully authoritative from the recording every tick
-        // (see tick() below), so we don't want the entity's own gravity
-        // fighting that -- it'd get overwritten anyway, but there's no
-        // reason to let it accumulate fall velocity in the meantime.
         this.setNoGravity(true);
     }
 
-    /** Attaches the playback this Echo replays. Called once by EchoManager right after construction. */
-    public void startPlayback(EchoPlayback playback) {
+    public void startPlayback(EchoPlayback playback, UUID ownerUuid) {
         this.playback = playback;
+        this.ownerUuid = ownerUuid;
+        this.lastActionTick = -1;
     }
 
-    public boolean hasPlayback() {
-        return playback != null;
-    }
+    public boolean hasPlayback() { return playback != null; }
+    public Identifier getSkinTexture() { return ECHO_SKIN; }
 
     @Override
     public void tick() {
         super.tick();
+        if (playback == null || level().isClientSide()) return;
 
-        // Echo movement is server-authoritative, driven from here on the
-        // integrated server's own tick -- not poked at from the client
-        // thread the way the Phase 2.5 spike's test rotation was. On the
-        // client side this entity is just a normal synced entity; its
-        // position/rotation arrive via the standard entity-tracking
-        // packets, so there's nothing to do here client-side.
-        if (playback == null || level().isClientSide()) {
+        playback.update(SECONDS_PER_TICK);
+        EchoSnapshot snap = playback.getCurrentSnapshot();
+        if (snap == null) { killEcho("empty recording"); return; }
+
+        applySnapshot(snap);
+
+        if (!level().noCollision(this)) {
+            killEcho("blocked by the world");
             return;
         }
 
-        playback.update(SECONDS_PER_TICK);
-        applySnapshot(playback.getCurrentSnapshot());
+        if (getY() < level().getMinY()) {
+            killEcho("fell into the void");
+            return;
+        }
+
+        int tick = playback.getCurrentTick();
+        if (tick != lastActionTick) {
+            lastActionTick = tick;
+            EchoAction action = playback.getCurrentAction();
+            if (action != null && !performAction(action)) return;
+        }
+    }
+
+    private boolean performAction(EchoAction action) {
+        if (!(level() instanceof ServerLevel serverLevel)) return true;
+        ServerPlayer owner = ownerUuid == null ? null : serverLevel.getServer().getPlayerList().getPlayer(ownerUuid);
+        if (owner == null) { killEcho("owner unavailable"); return false; }
+
+        BlockPos target = action.targetFrom(playback.getOriginBlock());
+        String currentBlockId = EchoAction.blockId(serverLevel.getBlockState(target));
+
+        if (!currentBlockId.equals(action.expectedBlockId)) {
+            killEcho("recorded world state no longer matches");
+            return false;
+        }
+
+        if (action.type == EchoAction.Type.BREAK_BLOCK) {
+            if (serverLevel.getBlockState(target).isAir()) {
+                killEcho("recorded block is already gone");
+                return false;
+            }
+            if (!serverLevel.destroyBlock(target, true, owner)) {
+                killEcho("recorded block could not be broken");
+                return false;
+            }
+            return true;
+        }
+
+        if (action.type == EchoAction.Type.PLACE_BLOCK) {
+            Item item = BuiltInRegistries.ITEM.getValue(Identifier.parse(action.itemId));
+            if (!(item instanceof BlockItem blockItem)) {
+                killEcho("recorded block item is unavailable");
+                return false;
+            }
+
+            ItemStack resource = findInInventory(owner, item);
+            if (resource.isEmpty()) {
+                killEcho("main player's resources ran out");
+                return false;
+            }
+
+            if (!serverLevel.getBlockState(target).canBeReplaced()) {
+                killEcho("recorded placement space is occupied");
+                return false;
+            }
+
+            if (!serverLevel.setBlock(target, blockItem.getBlock().defaultBlockState(), 3)) {
+                killEcho("recorded block could not be placed");
+                return false;
+            }
+            resource.shrink(1);
+            owner.containerMenu.broadcastChanges();
+            return true;
+        }
+
+        return true;
+    }
+
+    private ItemStack findInInventory(ServerPlayer player, Item item) {
+        for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+            ItemStack stack = player.getInventory().getItem(i);
+            if (!stack.isEmpty() && stack.is(item)) return stack;
+        }
+        return ItemStack.EMPTY;
+    }
+
+    private void killEcho(String reason) {
+        if (level() instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(net.minecraft.core.particles.ParticleTypes.POOF,
+                    getX(), getY() + 1.0, getZ(), 12, 0.25, 0.45, 0.25, 0.02);
+            serverLevel.playSound(null, getX(), getY(), getZ(),
+                    net.minecraft.sounds.SoundEvents.ENDERMAN_TELEPORT,
+                    net.minecraft.sounds.SoundSource.NEUTRAL, 0.45f, 0.7f);
+        }
+        discard();
     }
 
     private void applySnapshot(EchoSnapshot snap) {
-        if (snap == null) {
-            return;
-        }
-
         double prevX = getX();
         double prevZ = getZ();
-
         setPos(snap.x, snap.y, snap.z);
         setYRot(snap.yaw);
         setXRot(snap.pitch);
         setYHeadRot(snap.yaw);
         setYBodyRot(snap.yaw);
-
         setSprinting(snap.sprinting);
         setShiftKeyDown(snap.sneaking);
-
-        // LivingEntity's built-in walk-animation bookkeeping is driven by
-        // actual physics movement (aiStep/travel), which this entity never
-        // runs -- its position is set directly from the recording every
-        // tick instead. So the walk animation has to be fed manually from
-        // how far the snapshot moved this tick, or the ghost would stand
-        // in the walking pose without ever animating its legs.
-        // WalkAnimationState.update(targetSpeed, speedChangeRate, timeScale)
-        // -- confirmed 3-arg signature (compiler caught the earlier 2-arg
-        // guess). 0.4f speedChangeRate matches vanilla LivingEntity's own
-        // usage; timeScale is 1.0f since this already runs once per tick.
         double dx = snap.x - prevX;
         double dz = snap.z - prevZ;
         float distanceMoved = (float) Math.sqrt(dx * dx + dz * dz);
         walkAnimation.update(distanceMoved, 0.4f, 1.0f);
     }
 
-    /**
-     * Belt-and-suspenders alongside setInvulnerable(true): a ghost shouldn't
-     * be killable by anything -- suffocation from spawning inside a block,
-     * drowning, fall damage, fire, the void, none of it. This was the
-     * actual cause of it vanishing seconds after spawning (1 HP + normal
-     * LivingEntity mortality + likely suffocation from spawn position).
-     */
     @Override
-    public boolean isInvulnerableTo(ServerLevel level, DamageSource source) {
-        return true;
-    }
+    public boolean isInvulnerableTo(ServerLevel level, DamageSource source) { return true; }
 
     public static AttributeSupplier.Builder createEchoAttributes() {
         return LivingEntity.createLivingAttributes()
@@ -119,30 +174,8 @@ public class EchoEntity extends LivingEntity {
                 .add(Attributes.MOVEMENT_SPEED, 0.0);
     }
 
-    public void setSkinTexture(Identifier skinTexture) {
-        this.skinTexture = skinTexture;
-    }
-
-    public Identifier getSkinTexture() {
-        return skinTexture;
-    }
-
-    @Override
-    public boolean isPushable() {
-        return false;
-    }
-
-    @Override
-    public HumanoidArm getMainArm() {
-        return HumanoidArm.RIGHT;
-    }
-
-    @Override
-    public ItemStack getItemBySlot(EquipmentSlot slot) {
-        return ItemStack.EMPTY;
-    }
-
-    @Override
-    public void setItemSlot(EquipmentSlot slot, ItemStack stack) {
-    }
+    @Override public boolean isPushable() { return false; }
+    @Override public HumanoidArm getMainArm() { return HumanoidArm.RIGHT; }
+    @Override public ItemStack getItemBySlot(EquipmentSlot slot) { return ItemStack.EMPTY; }
+    @Override public void setItemSlot(EquipmentSlot slot, ItemStack stack) {}
 }

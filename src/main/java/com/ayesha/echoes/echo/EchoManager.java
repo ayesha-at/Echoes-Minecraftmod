@@ -5,6 +5,9 @@ import com.ayesha.echoes.recording.EchoRecording;
 import com.ayesha.echoes.recording.EchoSnapshot;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -88,21 +91,32 @@ public final class EchoManager {
         List<EchoSnapshot> snapshots = recording.getSnapshots();
         EchoSnapshot start = snapshots.get(0);
 
+        Vec3 spawnPoint = getSpawnPoint(clientPlayer, start);
         EchoEntity echo = new EchoEntity(EchoEntities.ECHO, serverLevel);
-        echo.setPos(start.x, start.y, start.z);
+        echo.setPos(spawnPoint.x, spawnPoint.y, spawnPoint.z);
         echo.setYRot(start.yaw);
         echo.setXRot(start.pitch);
         echo.setYHeadRot(start.yaw);
-        echo.setSkinTexture(clientPlayer.getSkin().body().id());
-        echo.startPlayback(new EchoPlayback(recording));
+        echo.startPlayback(new EchoPlayback(recording, spawnPoint.x, spawnPoint.y, spawnPoint.z), player.getUUID());
 
         serverLevel.addFreshEntity(echo);
-        playSpawnEffects(serverLevel, start.x, start.y, start.z);
+        playSpawnEffects(serverLevel, spawnPoint.x, spawnPoint.y, spawnPoint.z);
         activeEchoes.add(echo);
 
         player.sendSystemMessage(Component.literal(
                 "§d👻 Echo summoned (" + getActiveCount() + "/" + MAX_ACTIVE_ECHOES + ")"));
         return true;
+    }
+
+    /** Spawn at the block/face currently under the player's crosshair.
+     * The recording itself is then translated so its first frame lands here. */
+    private Vec3 getSpawnPoint(AbstractClientPlayer player, EchoSnapshot start) {
+        if (Minecraft.getInstance().hitResult instanceof BlockHitResult hit) {
+            Direction face = hit.getDirection();
+            Vec3 normal = new Vec3(face.getStepX(), face.getStepY(), face.getStepZ());
+            return hit.getLocation().add(normal.scale(0.36));
+        }
+        return new Vec3(player.getX(), player.getY(), player.getZ());
     }
 
     /** Despawns every active Echo. Bound to H in the locked V1 keybinds. */
