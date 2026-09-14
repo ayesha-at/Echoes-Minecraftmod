@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "echoes",
+  "version": "${version}",
+  "name": "EchoesLab",
+  "description": "Record your movement and summon a looping ghost Echo to replay it. Singleplayer, V1.",
+  "authors": [
+    "Ayesha Tanvir"
+  ],
+  "contact": {
+    "sources": "https://github.com/ayesha-tanvir/echoes"
+  },
+  "license": "MIT",
+  "icon": "assets/echoes/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.ayesha.echoes.EchoesMod"
+    ]
+  },
+  "mixins": [],
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "minecraft": "~26.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}
