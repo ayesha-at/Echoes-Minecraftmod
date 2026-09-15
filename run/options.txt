@@ -13,7 +13,7 @@ fovEffectScale:1.0
 darknessEffectScale:1.0
 glintSpeed:0.5
 glintStrength:0.75
-preferredGraphicsBackend:"default"
+preferredGraphicsBackend:"opengl"
 graphicsPreset:"fancy"
 prioritizeChunkUpdates:1
 fullscreen:false
@@ -106,7 +106,7 @@ panoramaScrollSpeed:1.0
 telemetryOptInExtra:false
 onboardAccessibility:false
 menuBackgroundBlurriness:5
-startedCleanly:false
+startedCleanly:true
 musicToast:"never"
 musicFrequency:"DEFAULT"
 key_key.attack:key.mouse.left

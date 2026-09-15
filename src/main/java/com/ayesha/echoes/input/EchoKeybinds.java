@@ -9,19 +9,13 @@ import net.minecraft.client.KeyMapping;
 import org.lwjgl.glfw.GLFW;
 
 /**
- * Locked V1 keybinds (Phase 4): R = record, E = summon, H = clear.
+ * Locked V1 keybinds (Phase 4, revised): R = record, Z = summon, H = clear.
  *
- * The Phase 2 (P, playback particle test) and Phase 2.5 (U, rendering
- * spike) debug keys are gone now that EchoManager/EchoEntity do the real
- * thing -- same as PlaybackTester and RenderingSpikeTester being deleted.
- *
- * KNOWN CONFLICT TO TEST FIRST: GLFW_KEY_E is vanilla's default Inventory
- * key. Unlike the Phase 2.5 O-vs-Social-Interactions clash (which silently
- * ate the keypress), the inventory screen isn't driven through the normal
- * KeyMapping-conflict system, so pressing E may open the inventory *and*
- * summon an Echo at the same time. If that happens in testing, the fix is
- * the same as last time: change the default here (or just rebind summon
- * via Options > Controls > EchoesLab) to a free key.
+ * Summon was moved off E on purpose: GLFW_KEY_E is vanilla's default
+ * Inventory key and isn't gated by the normal KeyMapping-conflict system,
+ * so it would open the inventory and summon an Echo at the same time.
+ * Z has no vanilla default binding, so it's safe out of the box -- players
+ * can still rebind any of these via Options > Controls > EchoesLab.
  */
 public final class EchoKeybinds {
 
@@ -40,7 +34,7 @@ public final class EchoKeybinds {
         summonKey = KeyMappingHelper.registerKeyMapping(new KeyMapping(
                 "key.echoes.summon",
                 InputConstants.Type.KEYSYM,
-                GLFW.GLFW_KEY_E,
+                GLFW.GLFW_KEY_Z,
                 KeyMapping.Category.MISC
         ));
 

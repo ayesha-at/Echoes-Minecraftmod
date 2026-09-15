@@ -1,6 +1,7 @@
 package com.ayesha.echoes.recording;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -20,6 +21,13 @@ public final class RecordingManager {
     private EchoRecording lastCompletedRecording = null;
     private boolean attackWasDown;
     private boolean useWasDown;
+    // Position the recording started at. EchoAction offsets are stored
+    // relative to THIS, not to wherever the player happened to be standing
+    // at the moment of the break/place -- that has to match the basis
+    // EchoPlayback uses to translate snapshot positions (relative to
+    // snapshot 0 / the summon point), or actions target the wrong block
+    // entirely as soon as the player has moved since recording started.
+    private BlockPos recordingOrigin;
 
     private RecordingManager() {}
 
@@ -35,6 +43,7 @@ public final class RecordingManager {
         if (recording) return;
         recording = true;
         currentRecording = new EchoRecording();
+        recordingOrigin = BlockPos.containing(player.getX(), player.getY(), player.getZ());
         attackWasDown = false;
         useWasDown = false;
         LOGGER.info("Echo recording started.");
@@ -75,9 +84,9 @@ public final class RecordingManager {
             if (attackDown && !attackWasDown) {
                 action = new EchoAction(
                         EchoAction.Type.BREAK_BLOCK,
-                        pos.getX() - floorX(client.player.getX()),
-                        pos.getY() - floorY(client.player.getY()),
-                        pos.getZ() - floorZ(client.player.getZ()),
+                        pos.getX() - recordingOrigin.getX(),
+                        pos.getY() - recordingOrigin.getY(),
+                        pos.getZ() - recordingOrigin.getZ(),
                         EchoAction.blockId(state),
                         ""
                 );
@@ -88,9 +97,9 @@ public final class RecordingManager {
                     var targetState = client.level.getBlockState(target);
                     action = new EchoAction(
                             EchoAction.Type.PLACE_BLOCK,
-                            target.getX() - floorX(client.player.getX()),
-                            target.getY() - floorY(client.player.getY()),
-                            target.getZ() - floorZ(client.player.getZ()),
+                            target.getX() - recordingOrigin.getX(),
+                            target.getY() - recordingOrigin.getY(),
+                            target.getZ() - recordingOrigin.getZ(),
                             EchoAction.blockId(targetState),
                             held.getItem().builtInRegistryHolder().key().identifier().toString()
                     );
@@ -102,8 +111,4 @@ public final class RecordingManager {
         useWasDown = useDown;
         return action;
     }
-
-    private static int floorX(double x) { return (int) Math.floor(x); }
-    private static int floorY(double y) { return (int) Math.floor(y); }
-    private static int floorZ(double z) { return (int) Math.floor(z); }
 }

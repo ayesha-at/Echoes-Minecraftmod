@@ -20,6 +20,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.UUID;
 
@@ -52,6 +53,12 @@ public class EchoEntity extends LivingEntity {
         if (playback == null || level().isClientSide()) return;
 
         playback.update(SECONDS_PER_TICK);
+
+        if (playback.hasExceededMaxLoops()) {
+            killEcho("reached its max loop count (" + EchoPlayback.MAX_LOOPS + ")");
+            return;
+        }
+
         EchoSnapshot snap = playback.getCurrentSnapshot();
         if (snap == null) { killEcho("empty recording"); return; }
 
@@ -59,6 +66,11 @@ public class EchoEntity extends LivingEntity {
         // through the world exactly as the original recording did, so a small
         // collision/placement difference must not kill the replay.
         applySnapshot(snap);
+
+        if (isOutsideWorld()) {
+            killEcho("left the world");
+            return;
+        }
 
         int tick = playback.getCurrentTick();
         if (tick != lastActionTick) {
@@ -68,20 +80,44 @@ public class EchoEntity extends LivingEntity {
         }
     }
 
+    /** V1.1: recordings no longer reset back to the summon point every
+     *  loop (see EchoPlayback) -- an automation-style Echo can walk itself
+     *  off a cliff or past the world border loop after loop, so it needs
+     *  its own way to notice and stop instead of relying on the other
+     *  death conditions. */
+    private boolean isOutsideWorld() {
+        if (!(level() instanceof ServerLevel serverLevel)) return false;
+        double y = getY();
+        // Renamed from getMinBuildHeight()/getMaxBuildHeight() -- current
+        // mappings use getMinY()/getMaxY() on LevelHeightAccessor.
+        return y < serverLevel.getMinY() - 16 || y > serverLevel.getMaxY() + 16;
+    }
+
     private boolean performAction(EchoAction action) {
         if (!(level() instanceof ServerLevel serverLevel)) return true;
         ServerPlayer owner = ownerUuid == null ? null : serverLevel.getServer().getPlayerList().getPlayer(ownerUuid);
         if (owner == null) { killEcho("owner unavailable"); return false; }
 
-        BlockPos target = action.targetFrom(playback.getOriginBlock());
+        BlockPos target = action.targetFrom(playback.getCurrentOriginBlock());
 
         if (action.type == EchoAction.Type.BREAK_BLOCK) {
             // Forgiving interaction: if the recorded block has already been
             // removed or changed, simply skip this action and keep replaying.
-            // The Echo should only die for a resource it genuinely needs.
-            if (serverLevel.getBlockState(target).isAir()) {
+            // The Echo should only die for a resource it genuinely needs,
+            // or for a block it will NEVER be able to break (bedrock etc).
+            BlockState targetState = serverLevel.getBlockState(target);
+            if (targetState.isAir()) {
                 return true;
             }
+            if (targetState.getDestroySpeed(serverLevel, target) < 0) {
+                killEcho("hit an unbreakable block");
+                return false;
+            }
+            // V1.1: creative-style instant break -- no tool/tier/hardness
+            // check, no mining-speed delay. The Echo doesn't remember or
+            // care what tool was in hand during recording; it just clears
+            // the block. Deliberate simplification for the "wow factor" --
+            // revisit if tool-accurate mining ever becomes a goal.
             serverLevel.destroyBlock(target, true, owner);
             return true;
         }

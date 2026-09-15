@@ -8,33 +8,106 @@ import net.minecraft.util.Mth;
 
 import java.util.List;
 
-/** Plays a recording relative to the point where an Echo was summoned. */
+/**
+ * Plays a recording relative to the point where an Echo was summoned.
+ *
+ * V1.1 automation change: each time the recording finishes a loop, it does
+ * NOT reset back to the summon point. Instead the whole loop is re-based
+ * forward by the recording's own net displacement (its last snapshot's
+ * position minus its first), so a recording that walked forward while
+ * mining keeps extending that tunnel loop after loop instead of re-digging
+ * the same one. A recording that ends where it started (net displacement
+ * ~0) just keeps looping in place, same as before.
+ */
 public final class EchoPlayback {
+
+    /** Safety cap on how many times the recording can re-loop before the
+     *  Echo is retired on its own, even if nothing else ever kills it
+     *  (e.g. a recording with ~0 net displacement that would otherwise
+     *  run forever). Deliberately huge -- this is a safety net, not a
+     *  design limit. */
+    public static final int MAX_LOOPS = 100_000;
+
     private final EchoRecording recording;
     private final double originX;
     private final double originY;
     private final double originZ;
-    private final BlockPos originBlock;
+    private final double netDispX;
+    private final double netDispY;
+    private final double netDispZ;
     private double tickProgress = 0.0;
+    private int completedLoops = 0;
 
     public EchoPlayback(EchoRecording recording, double originX, double originY, double originZ) {
         this.recording = recording;
         this.originX = originX;
         this.originY = originY;
         this.originZ = originZ;
-        this.originBlock = BlockPos.containing(originX, originY, originZ);
+
+        List<EchoSnapshot> snaps = recording.getSnapshots();
+        EchoSnapshot first = snaps.get(0);
+        EchoSnapshot last = snaps.get(snaps.size() - 1);
+
+        // Prefer deriving the per-loop advance from the recorded block
+        // actions rather than the player's raw walking position. Raw
+        // position is a continuous double and almost never perfectly
+        // axis-aligned (mouse look/strafe always adds a hair of off-axis
+        // drift, even when it "looks" straight). completedLoops * that
+        // drift, floored into a BlockPos every loop, eventually crosses
+        // an integer boundary and produces a sudden one-block jog --
+        // a long straight bridge that abruptly turns. Block actions are
+        // always whole-number offsets, so using two of them gives an
+        // exact, drift-free direction instead.
+        EchoAction firstAction = null;
+        EchoAction lastAction = null;
+        for (EchoSnapshot s : snaps) {
+            if (s.action != null) {
+                if (firstAction == null) firstAction = s.action;
+                lastAction = s.action;
+            }
+        }
+
+        if (firstAction != null && lastAction != null && firstAction != lastAction) {
+            this.netDispX = lastAction.dx - firstAction.dx;
+            this.netDispY = lastAction.dy - firstAction.dy;
+            this.netDispZ = lastAction.dz - firstAction.dz;
+        } else {
+            this.netDispX = last.x - first.x;
+            this.netDispY = last.y - first.y;
+            this.netDispZ = last.z - first.z;
+        }
     }
 
-    public void reset() { tickProgress = 0.0; }
+    public void reset() { tickProgress = 0.0; completedLoops = 0; }
     public int getCurrentTick() { return (int) Math.floor(tickProgress); }
-    public BlockPos getOriginBlock() { return originBlock; }
+    public int getCompletedLoops() { return completedLoops; }
+    public boolean hasExceededMaxLoops() { return completedLoops >= MAX_LOOPS; }
+
+    /** Block-space origin for THIS loop -- shifts forward each time the
+     *  recording wraps, by completedLoops * netDisplacement. EchoActions
+     *  are offset from this (not the fixed summon point), so break/place
+     *  targets keep pace with wherever this loop has advanced to. */
+    public BlockPos getCurrentOriginBlock() {
+        return BlockPos.containing(
+                originX + completedLoops * netDispX,
+                originY + completedLoops * netDispY,
+                originZ + completedLoops * netDispZ
+        );
+    }
 
     public void update(double deltaSeconds) {
         int count = recording.getSnapshotCount();
         if (count < 2) { tickProgress = 0.0; return; }
         tickProgress += deltaSeconds * EchoRecording.TICKS_PER_SECOND;
-        double loopLength = count - 1;
-        if (tickProgress >= loopLength) tickProgress %= loopLength;
+        // Loop over all `count` indices (0..count-1) so the last snapshot's
+        // tick -- and any EchoAction attached to it -- actually gets read
+        // once before wrapping, instead of being modulo'd away the instant
+        // tickProgress reaches it.
+        double loopLength = count;
+        if (tickProgress >= loopLength) {
+            tickProgress %= loopLength;
+            completedLoops++;
+        }
     }
 
     public EchoSnapshot getCurrentSnapshot() {
@@ -60,10 +133,13 @@ public final class EchoPlayback {
 
     private EchoSnapshot translate(EchoSnapshot raw) {
         EchoSnapshot start = recording.getSnapshots().get(0);
+        double advanceX = completedLoops * netDispX;
+        double advanceY = completedLoops * netDispY;
+        double advanceZ = completedLoops * netDispZ;
         return new EchoSnapshot(
-                originX + (raw.x - start.x),
-                originY + (raw.y - start.y),
-                originZ + (raw.z - start.z),
+                originX + advanceX + (raw.x - start.x),
+                originY + advanceY + (raw.y - start.y),
+                originZ + advanceZ + (raw.z - start.z),
                 raw.yaw, raw.pitch,
                 raw.velocityX, raw.velocityY, raw.velocityZ,
                 raw.sprinting, raw.sneaking, raw.jumping, raw.hotbarSlot, raw.action
