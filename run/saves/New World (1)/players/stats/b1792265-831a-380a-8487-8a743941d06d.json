@@ -1,0 +1,25 @@
+{
+  "stats": {
+    "minecraft:dropped": {
+      "minecraft:sand": 1
+    },
+    "minecraft:mined": {
+      "minecraft:sand": 12
+    },
+    "minecraft:custom": {
+      "minecraft:time_since_rest": 2592,
+      "minecraft:walk_one_cm": 4404,
+      "minecraft:total_world_time": 2612,
+      "minecraft:leave_game": 1,
+      "minecraft:play_time": 2592,
+      "minecraft:jump": 1,
+      "minecraft:time_since_death": 2592,
+      "minecraft:drop": 1
+    },
+    "minecraft:picked_up": {
+      "minecraft:sand": 4,
+      "minecraft:snowball": 2
+    }
+  },
+  "DataVersion": 4903
+}
