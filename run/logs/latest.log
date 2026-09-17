@@ -1,6 +1,6 @@
-[23:22:52] [main/INFO] (FabricLoader/GameProvider) Loading Minecraft 26.2 with Fabric Loader 0.19.5
-[23:22:52] [main/INFO] (FabricLoader/Mappings) Mappings not present!
-[23:22:52] [main/INFO] (FabricLoader) Loading 51 mods:
+[16:17:35] [main/INFO] (FabricLoader/GameProvider) Loading Minecraft 26.2 with Fabric Loader 0.19.5
+[16:17:35] [main/INFO] (FabricLoader/Mappings) Mappings not present!
+[16:17:35] [main/INFO] (FabricLoader) Loading 51 mods:
 	- echoes 0.1.0
 	- fabric-api 0.159.0+26.2
 	- fabric-api-base 2.0.4+ece063239e
@@ -52,12 +52,12 @@
 	- java 25
 	- minecraft 26.2
 	- mixinextras 0.5.5
-[23:22:53] [main/INFO] (FabricLoader/Mixin) SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/C:/Users/JA/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.17.4+mixin.0.8.7/5f66cc9f59b8efaa942155a3d5a30599bf6640dd/sponge-mixin-0.17.4+mixin.0.8.7.jar Service=Knot/Fabric Env=CLIENT
-[23:22:56] [main/INFO] (FabricLoader/MixinExtras|Service) Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.5).
-[23:22:59] [Datafixer Bootstrap #0/INFO] (Minecraft) 295 Datafixer optimizations took 918 milliseconds
-[23:23:14] [Render thread/INFO] (Minecraft) Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
-[23:23:14] [Render thread/INFO] (Minecraft) Setting user: Player720
-[23:23:15] [Download-2/ERROR] (Minecraft) Failed to fetch user properties
+[16:17:35] [main/INFO] (FabricLoader/Mixin) SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/C:/Users/JA/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.17.4+mixin.0.8.7/5f66cc9f59b8efaa942155a3d5a30599bf6640dd/sponge-mixin-0.17.4+mixin.0.8.7.jar Service=Knot/Fabric Env=CLIENT
+[16:17:38] [main/INFO] (FabricLoader/MixinExtras|Service) Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.5).
+[16:17:40] [Datafixer Bootstrap #0/INFO] (Minecraft) 295 Datafixer optimizations took 857 milliseconds
+[16:17:53] [Render thread/INFO] (Minecraft) Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[16:17:53] [Render thread/INFO] (Minecraft) Setting user: Player86
+[16:17:54] [Download-2/ERROR] (Minecraft) Failed to fetch user properties
 com.mojang.authlib.exceptions.InvalidCredentialsException: Status: 401
 	at knot//com.mojang.authlib.exceptions.MinecraftClientHttpException.toAuthenticationException(MinecraftClientHttpException.java:70)
 	at knot//com.mojang.authlib.yggdrasil.YggdrasilUserApiService.fetchProperties(YggdrasilUserApiService.java:173)
@@ -73,13 +73,14 @@ Caused by: MinecraftClientHttpException[type=HTTP_ERROR, status=401, response=Er
 	at knot//com.mojang.authlib.minecraft.client.MinecraftClient.get(MinecraftClient.java:65)
 	at knot//com.mojang.authlib.yggdrasil.YggdrasilUserApiService.fetchProperties(YggdrasilUserApiService.java:123)
 	... 5 more
-[23:23:15] [Render thread/INFO] (Indigo) [Indigo] Registering Indigo renderer!
-[23:23:16] [Render thread/INFO] (Minecraft) Backend library: LWJGL version 3.4.1-snapshot
-[23:23:16] [Render thread/INFO] (Minecraft) Using graphics backend OpenGL, using drivers: 3.3.0 - Build 32.0.101.7084
-[23:23:16] [Render thread/INFO] (Minecraft) Using graphics device: Intel(R) Iris(R) Xe Graphics (Intel)
-[23:23:16] [Render thread/INFO] (Minecraft) Using graphics device extensions: GL_ARB_multi_draw_indirect, GL_ARB_buffer_storage, GL_ARB_shader_draw_parameters, GL_ARB_base_instance, GL_KHR_debug, GL_ARB_draw_indirect, GL_ARB_clip_control, GL_ARB_vertex_attrib_binding, GL_ARB_direct_state_access, GL_EXT_texture_filter_anisotropic
-[23:23:18] [Download-1/INFO] (Minecraft) Could not authorize you against Realms server: java.lang.RuntimeException: Failed to parse into SignedJWT: FabricMC
-[23:23:18] [Download-1/ERROR] (Minecraft) Failed to fetch Realms feature flags
+[16:17:54] [Render thread/INFO] (Indigo) [Indigo] Registering Indigo renderer!
+[16:17:55] [Render thread/INFO] (Minecraft) Backend library: LWJGL version 3.4.1-snapshot
+[16:17:55] [Render thread/INFO] (Minecraft) Using graphics backend OpenGL, using drivers: 3.3.0 - Build 32.0.101.7084
+[16:17:55] [Render thread/INFO] (Minecraft) Using graphics device: Intel(R) Iris(R) Xe Graphics (Intel)
+[16:17:55] [Render thread/INFO] (Minecraft) Using graphics device extensions: GL_ARB_multi_draw_indirect, GL_ARB_buffer_storage, GL_ARB_shader_draw_parameters, GL_ARB_base_instance, GL_KHR_debug, GL_ARB_draw_indirect, GL_ARB_clip_control, GL_ARB_vertex_attrib_binding, GL_ARB_direct_state_access, GL_EXT_texture_filter_anisotropic
+[16:17:57] [Render thread/INFO] (Minecraft) Reloading ResourceManager: vanilla, echoes, fabric-api, fabric-api-base, fabric-api-lookup-api-v1, fabric-biome-api-v1, fabric-block-api-v1, fabric-block-getter-api-v2, fabric-client-gametest-api-v1, fabric-command-api-v2, fabric-content-registries-v0, fabric-convention-tags-v2, fabric-crash-report-info-v1, fabric-creative-tab-api-v1, fabric-data-attachment-api-v1, fabric-data-generation-api-v1, fabric-debug-api-v1, fabric-dimensions-v1, fabric-entity-events-v1, fabric-events-interaction-v0, fabric-game-rule-api-v1, fabric-gametest-api-v1, fabric-item-api-v1, fabric-key-mapping-api-v1, fabric-lifecycle-events-v1, fabric-loot-api-v3, fabric-menu-api-v1, fabric-message-api-v1, fabric-model-loading-api-v1, fabric-networking-api-v1, fabric-object-builder-api-v1, fabric-particles-v1, fabric-permission-api-v1, fabric-recipe-api-v1, fabric-registry-sync-v0, fabric-renderer-api-v1, fabric-renderer-indigo, fabric-rendering-fluids-v1, fabric-rendering-v1, fabric-resource-conditions-api-v1, fabric-resource-loader-v0, fabric-resource-loader-v1, fabric-screen-api-v1, fabric-serialization-api-v1, fabric-sound-api-v1, fabric-tag-api-v1, fabric-transfer-api-v1, fabric-transitive-access-wideners-v1, fabricloader
+[16:17:57] [Download-2/INFO] (Minecraft) Could not authorize you against Realms server: java.lang.RuntimeException: Failed to parse into SignedJWT: FabricMC
+[16:17:57] [Download-2/ERROR] (Minecraft) Failed to fetch Realms feature flags
 com.mojang.realmsclient.exception.RealmsServiceException: Realms authentication error with message 'java.lang.RuntimeException: Failed to parse into SignedJWT: FabricMC'
 	at knot//com.mojang.realmsclient.client.RealmsClient.execute(RealmsClient.java:528)
 	at knot//com.mojang.realmsclient.client.RealmsClient.fetchFeatureFlags(RealmsClient.java:187)
@@ -87,27 +88,26 @@ com.mojang.realmsclient.exception.RealmsServiceException: Realms authentication 
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
 	at java.base/java.lang.Thread.run(Thread.java:1474)
-[23:23:18] [Render thread/INFO] (Minecraft) Reloading ResourceManager: vanilla, echoes, fabric-api, fabric-api-base, fabric-api-lookup-api-v1, fabric-biome-api-v1, fabric-block-api-v1, fabric-block-getter-api-v2, fabric-client-gametest-api-v1, fabric-command-api-v2, fabric-content-registries-v0, fabric-convention-tags-v2, fabric-crash-report-info-v1, fabric-creative-tab-api-v1, fabric-data-attachment-api-v1, fabric-data-generation-api-v1, fabric-debug-api-v1, fabric-dimensions-v1, fabric-entity-events-v1, fabric-events-interaction-v0, fabric-game-rule-api-v1, fabric-gametest-api-v1, fabric-item-api-v1, fabric-key-mapping-api-v1, fabric-lifecycle-events-v1, fabric-loot-api-v3, fabric-menu-api-v1, fabric-message-api-v1, fabric-model-loading-api-v1, fabric-networking-api-v1, fabric-object-builder-api-v1, fabric-particles-v1, fabric-permission-api-v1, fabric-recipe-api-v1, fabric-registry-sync-v0, fabric-renderer-api-v1, fabric-renderer-indigo, fabric-rendering-fluids-v1, fabric-rendering-v1, fabric-resource-conditions-api-v1, fabric-resource-loader-v0, fabric-resource-loader-v1, fabric-screen-api-v1, fabric-serialization-api-v1, fabric-sound-api-v1, fabric-tag-api-v1, fabric-transfer-api-v1, fabric-transitive-access-wideners-v1, fabricloader
-[23:23:19] [Worker-Main-5/INFO] (Minecraft) Found unifont_all_no_pua-17.0.01.hex, loading
-[23:23:19] [Worker-Main-4/INFO] (Minecraft) Found unifont_pua-17.0.01.hex, loading
-[23:23:20] [Worker-Main-4/INFO] (Minecraft) Found unifont_jp_patch-17.0.01.hex, loading
-[23:23:22] [Render thread/INFO] (Minecraft) OpenAL initialized on device OpenAL Soft on Headphones (Solix Pinnacle ANC)
-[23:23:22] [Render thread/INFO] (Minecraft) Sound engine started
-[23:23:22] [Render thread/INFO] (Minecraft) Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
-[23:23:22] [Render thread/INFO] (Minecraft) Created: 128x128x0 minecraft:textures/atlas/decorated_pot.png-atlas
-[23:23:22] [Render thread/INFO] (Minecraft) Created: 2048x1024x0 minecraft:textures/atlas/armor_trims.png-atlas
-[23:23:22] [Render thread/INFO] (Minecraft) Created: 512x256x0 minecraft:textures/atlas/paintings.png-atlas
-[23:23:22] [Render thread/INFO] (Minecraft) Created: 1024x512x0 minecraft:textures/atlas/shield_patterns.png-atlas
-[23:23:22] [Render thread/INFO] (Minecraft) Created: 2048x2048x4 minecraft:textures/atlas/blocks.png-atlas
-[23:23:23] [Render thread/INFO] (Minecraft) Created: 512x512x0 minecraft:textures/atlas/chest.png-atlas
-[23:23:23] [Render thread/INFO] (Minecraft) Created: 256x128x0 minecraft:textures/atlas/celestials.png-atlas
-[23:23:23] [Render thread/INFO] (Minecraft) Created: 1024x512x0 minecraft:textures/atlas/banner_patterns.png-atlas
-[23:23:23] [Render thread/INFO] (Minecraft) Created: 1024x512x0 minecraft:textures/atlas/items.png-atlas
-[23:23:23] [Render thread/INFO] (Minecraft) Created: 1024x1024x0 minecraft:textures/atlas/gui.png-atlas
-[23:23:24] [Render thread/INFO] (Minecraft) Created: 128x64x0 minecraft:textures/atlas/map_decorations.png-atlas
-[23:23:24] [Render thread/INFO] (Minecraft) Created: 512x512x0 minecraft:textures/atlas/shulker_boxes.png-atlas
-[23:23:24] [Download-1/INFO] (Minecraft) Could not authorize you against Realms server: java.lang.RuntimeException: Failed to parse into SignedJWT: FabricMC
-[23:23:24] [Download-1/ERROR] (Minecraft) Couldn't connect to realms
+[16:17:58] [Worker-Main-6/INFO] (Minecraft) Found unifont_all_no_pua-17.0.01.hex, loading
+[16:17:58] [Worker-Main-3/INFO] (Minecraft) Found unifont_jp_patch-17.0.01.hex, loading
+[16:17:58] [Worker-Main-2/INFO] (Minecraft) Found unifont_pua-17.0.01.hex, loading
+[16:18:02] [Render thread/INFO] (Minecraft) OpenAL initialized on device OpenAL Soft on Speakers (Realtek(R) Audio)
+[16:18:02] [Render thread/INFO] (Minecraft) Sound engine started
+[16:18:02] [Render thread/INFO] (Minecraft) Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
+[16:18:02] [Render thread/INFO] (Minecraft) Created: 128x128x0 minecraft:textures/atlas/decorated_pot.png-atlas
+[16:18:02] [Render thread/INFO] (Minecraft) Created: 2048x1024x0 minecraft:textures/atlas/armor_trims.png-atlas
+[16:18:02] [Render thread/INFO] (Minecraft) Created: 512x256x0 minecraft:textures/atlas/paintings.png-atlas
+[16:18:02] [Render thread/INFO] (Minecraft) Created: 1024x512x0 minecraft:textures/atlas/shield_patterns.png-atlas
+[16:18:02] [Render thread/INFO] (Minecraft) Created: 2048x2048x4 minecraft:textures/atlas/blocks.png-atlas
+[16:18:03] [Render thread/INFO] (Minecraft) Created: 512x512x0 minecraft:textures/atlas/chest.png-atlas
+[16:18:03] [Render thread/INFO] (Minecraft) Created: 256x128x0 minecraft:textures/atlas/celestials.png-atlas
+[16:18:03] [Render thread/INFO] (Minecraft) Created: 1024x512x0 minecraft:textures/atlas/banner_patterns.png-atlas
+[16:18:03] [Render thread/INFO] (Minecraft) Created: 1024x512x0 minecraft:textures/atlas/items.png-atlas
+[16:18:03] [Render thread/INFO] (Minecraft) Created: 1024x1024x0 minecraft:textures/atlas/gui.png-atlas
+[16:18:03] [Render thread/INFO] (Minecraft) Created: 128x64x0 minecraft:textures/atlas/map_decorations.png-atlas
+[16:18:03] [Render thread/INFO] (Minecraft) Created: 512x512x0 minecraft:textures/atlas/shulker_boxes.png-atlas
+[16:18:04] [Download-2/INFO] (Minecraft) Could not authorize you against Realms server: java.lang.RuntimeException: Failed to parse into SignedJWT: FabricMC
+[16:18:04] [Download-2/ERROR] (Minecraft) Couldn't connect to realms
 com.mojang.realmsclient.exception.RealmsServiceException: Realms authentication error with message 'java.lang.RuntimeException: Failed to parse into SignedJWT: FabricMC'
 	at knot//com.mojang.realmsclient.client.RealmsClient.execute(RealmsClient.java:528)
 	at knot//com.mojang.realmsclient.client.RealmsClient.clientCompatible(RealmsClient.java:308)
@@ -116,32 +116,34 @@ com.mojang.realmsclient.exception.RealmsServiceException: Realms authentication 
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
 	at java.base/java.lang.Thread.run(Thread.java:1474)
-[23:23:32] [Render thread/INFO] (Minecraft) Loaded 1585 recipes
-[23:23:32] [Render thread/INFO] (Minecraft) Loaded 1688 advancements
-[23:23:32] [Render thread/INFO] (BiomeModificationImpl) Applied 0 biome modifications to 0 of 66 new biomes in 1.557 ms
-[23:23:32] [Server thread/INFO] (Minecraft) Starting integrated minecraft server version 26.2
-[23:23:32] [Server thread/INFO] (Minecraft) Generating keypair
-[23:23:33] [Server thread/INFO] (Minecraft) Loading 0 persistent chunks...
-[23:23:33] [Server thread/INFO] (Minecraft) Preparing spawn area: 16%
-[23:23:33] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
-[23:23:33] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
-[23:23:33] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
-[23:23:33] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (world): All chunks are saved
-[23:23:33] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM1): All chunks are saved
-[23:23:33] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
-[23:23:33] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage: All dimensions are saved
-[23:23:35] [Server thread/INFO] (Minecraft) Loading 49 chunks for player spawn...
-[23:23:35] [Server thread/INFO] (Minecraft) Preparing spawn area: 16%
-[23:23:35] [Server thread/INFO] (Minecraft) Preparing spawn area: 16%
-[23:23:35] [Server thread/INFO] (Minecraft) Preparing spawn area: 16%
-[23:23:35] [Server thread/INFO] (Minecraft) Preparing spawn area: 16%
-[23:23:36] [Server thread/INFO] (Minecraft) Preparing spawn area: 16%
-[23:23:36] [Server thread/INFO] (Minecraft) Time elapsed: 2662 ms
-[23:23:36] [Server thread/INFO] (Minecraft) Player720[local:E:e0443347] logged in with entity id 70 at (33.15466108912765, 64.41999998688698, -193.18783231876102)
-[23:23:36] [Server thread/INFO] (Minecraft) Player720 joined the game
-[23:23:36] [Server thread/INFO] (Minecraft) Changing view distance to 16, from 10
-[23:23:36] [Server thread/INFO] (Minecraft) Changing simulation distance to 12, from 0
-[23:23:37] [Download-1/ERROR] (Minecraft) Failed to retrieve profile key pair
+[16:18:10] [Render thread/INFO] (Minecraft) Loaded 1585 recipes
+[16:18:10] [Render thread/INFO] (Minecraft) Loaded 1688 advancements
+[16:18:10] [Render thread/INFO] (BiomeModificationImpl) Applied 0 biome modifications to 0 of 66 new biomes in 1.269 ms
+[16:18:10] [Server thread/INFO] (Minecraft) Starting integrated minecraft server version 26.2
+[16:18:10] [Server thread/INFO] (Minecraft) Generating keypair
+[16:18:11] [Server thread/INFO] (Minecraft) Loading 0 persistent chunks...
+[16:18:11] [Server thread/INFO] (Minecraft) Preparing spawn area: 16%
+[16:18:11] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
+[16:18:12] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
+[16:18:12] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
+[16:18:12] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (world): All chunks are saved
+[16:18:12] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[16:18:12] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[16:18:12] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage: All dimensions are saved
+[16:18:13] [Server thread/INFO] (Minecraft) Loading 49 chunks for player spawn...
+[16:18:13] [Server thread/INFO] (Minecraft) Preparing spawn area: 16%
+[16:18:13] [Server thread/INFO] (Minecraft) Preparing spawn area: 16%
+[16:18:13] [Server thread/INFO] (Minecraft) Preparing spawn area: 16%
+[16:18:13] [Server thread/INFO] (Minecraft) Preparing spawn area: 100%
+[16:18:13] [Server thread/INFO] (Minecraft) Time elapsed: 2036 ms
+[16:18:13] [Server thread/INFO] (Minecraft) Player86[local:E:af0cb46f] logged in with entity id 65 at (69.30757848068505, 69.0, -25.0438868626526)
+[16:18:13] [Server thread/INFO] (Minecraft) Player86 joined the game
+[16:18:13] [Server thread/INFO] (Minecraft) Changing view distance to 16, from 10
+[16:18:13] [Server thread/INFO] (Minecraft) Changing simulation distance to 12, from 0
+[16:18:14] [Render thread/INFO] (Minecraft) Resizing Dynamic Transforms UBO, capacity limit of 2 reached during a single frame. New capacity will be 4.
+[16:18:14] [Render thread/INFO] (Minecraft) Loaded 2 advancements
+[16:18:14] [Render thread/INFO] (Minecraft) Resizing Dynamic Transforms UBO, capacity limit of 4 reached during a single frame. New capacity will be 8.
+[16:18:14] [Download-2/ERROR] (Minecraft) Failed to retrieve profile key pair
 MinecraftClientHttpException[type=HTTP_ERROR, status=401, response=ErrorResponse[path=/player/certificates, error=null, errorMessage=null, details=null]]
 	at knot//com.mojang.authlib.minecraft.client.MinecraftClient.buildHttpException(MinecraftClient.java:170)
 	at knot//com.mojang.authlib.minecraft.client.MinecraftClient.readServiceResponse(MinecraftClient.java:147)
@@ -153,229 +155,36 @@ MinecraftClientHttpException[type=HTTP_ERROR, status=401, response=ErrorResponse
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
 	at java.base/java.lang.Thread.run(Thread.java:1474)
-[23:23:37] [Render thread/INFO] (Minecraft) Resizing Dynamic Transforms UBO, capacity limit of 2 reached during a single frame. New capacity will be 4.
-[23:23:37] [Render thread/INFO] (Minecraft) Loaded 2 advancements
-[23:23:37] [Render thread/INFO] (Minecraft) Resizing Dynamic Transforms UBO, capacity limit of 4 reached during a single frame. New capacity will be 8.
-[23:23:37] [Render thread/INFO] (Minecraft) Resizing Dynamic Transforms UBO, capacity limit of 8 reached during a single frame. New capacity will be 16.
-[23:23:37] [Render thread/INFO] (Minecraft) Resizing Chunk Sections UBO, capacity limit of 2 reached during a single frame. New capacity will be 4.
-[23:23:37] [Render thread/INFO] (Minecraft) Resizing Chunk Sections UBO, capacity limit of 4 reached during a single frame. New capacity will be 8.
-[23:23:38] [Render thread/INFO] (Minecraft) Resizing Chunk Sections UBO, capacity limit of 8 reached during a single frame. New capacity will be 16.
-[23:23:38] [Render thread/INFO] (Minecraft) Resizing Chunk Sections UBO, capacity limit of 16 reached during a single frame. New capacity will be 32.
-[23:23:38] [Render thread/INFO] (Minecraft) Resizing Chunk Sections UBO, capacity limit of 32 reached during a single frame. New capacity will be 64.
-[23:23:38] [Render thread/INFO] (Minecraft) Resizing Chunk Sections UBO, capacity limit of 64 reached during a single frame. New capacity will be 128.
-[23:23:40] [Render thread/INFO] (Minecraft) Resizing Chunk Sections UBO, capacity limit of 128 reached during a single frame. New capacity will be 256.
-[23:23:44] [Render thread/INFO] (Minecraft) Resizing Chunk Sections UBO, capacity limit of 256 reached during a single frame. New capacity will be 512.
-[23:23:53] [Render thread/INFO] (Minecraft) Resizing Chunk Sections UBO, capacity limit of 512 reached during a single frame. New capacity will be 1024.
-[23:23:59] [Render thread/INFO] (echoes) Echo recording started.
-[23:23:59] [Render thread/INFO] (Minecraft) [System] [CHAT] §b👁 Echo recording started
-[23:24:11] [Render thread/INFO] (echoes) Echo recording stopped: EchoRecording[snapshots=255, duration=12.8s]
-[23:24:11] [Render thread/INFO] (Minecraft) [System] [CHAT] §b👁 Echo recording saved — 12.8s (255 snapshots)
-[23:24:16] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 Echo summoned (1/3)
-[23:24:44] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 All Echoes cleared
-[23:24:45] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 Echo summoned (1/3)
-[23:25:00] [Render thread/INFO] (Minecraft) Loaded 20 advancements
-[23:25:06] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 All Echoes cleared
-[23:25:09] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 Echo summoned (1/3)
-[23:25:30] [Render thread/INFO] (Minecraft) Loaded 30 advancements
-[23:25:44] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 Echo summoned (2/3)
-[23:25:50] [Render thread/WARN] (Minecraft) Unable to play empty soundEvent: minecraft:entity.salmon.ambient
-[23:25:55] [Render thread/INFO] (echoes) Echo recording started.
-[23:25:55] [Render thread/INFO] (Minecraft) [System] [CHAT] §b👁 Echo recording started
-[23:26:01] [Render thread/INFO] (echoes) Echo recording stopped: EchoRecording[snapshots=110, duration=5.5s]
-[23:26:01] [Render thread/INFO] (Minecraft) [System] [CHAT] §b👁 Echo recording saved — 5.5s (110 snapshots)
-[23:26:05] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 Echo summoned (3/3)
-[23:26:41] [Render thread/INFO] (Minecraft) [System] [CHAT] §cAlready at the max of 3 Echoes — press H to clear them first.
-[23:26:43] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 All Echoes cleared
-[23:26:43] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 Echo summoned (1/3)
-[23:26:48] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 Echo summoned (2/3)
-[23:26:54] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 All Echoes cleared
-[23:26:58] [Render thread/INFO] (echoes) Echo recording started.
-[23:26:58] [Render thread/INFO] (Minecraft) [System] [CHAT] §b👁 Echo recording started
-[23:27:13] [Render thread/INFO] (echoes) Echo recording stopped: EchoRecording[snapshots=296, duration=14.8s]
-[23:27:13] [Render thread/INFO] (Minecraft) [System] [CHAT] §b👁 Echo recording saved — 14.8s (296 snapshots)
-[23:27:19] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 Echo summoned (1/3)
-[23:28:02] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 All Echoes cleared
-[23:28:05] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 Echo summoned (1/3)
-[23:28:29] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 All Echoes cleared
-[23:28:29] [Render thread/INFO] (echoes) Echo recording started.
-[23:28:29] [Render thread/INFO] (Minecraft) [System] [CHAT] §b👁 Echo recording started
-[23:28:34] [Render thread/INFO] (echoes) Echo recording stopped: EchoRecording[snapshots=99, duration=5.0s]
-[23:28:34] [Render thread/INFO] (Minecraft) [System] [CHAT] §b👁 Echo recording saved — 5.0s (99 snapshots)
-[23:28:36] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 Echo summoned (1/3)
-[23:29:01] [Render thread/INFO] (echoes) Echo recording started.
-[23:29:01] [Render thread/INFO] (Minecraft) [System] [CHAT] §b👁 Echo recording started
-[23:29:06] [Render thread/INFO] (echoes) Echo recording stopped: EchoRecording[snapshots=85, duration=4.3s]
-[23:29:06] [Render thread/INFO] (Minecraft) [System] [CHAT] §b👁 Echo recording saved — 4.3s (85 snapshots)
-[23:29:07] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 Echo summoned (2/3)
-[23:29:13] [Server thread/INFO] (Minecraft) Saving and pausing game...
-[23:29:13] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
-[23:29:13] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
-[23:29:13] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
-[23:29:14] [Server thread/INFO] (Minecraft) Stopping server
-[23:29:14] [Server thread/INFO] (Minecraft) Saving players
-[23:29:14] [Server thread/INFO] (Minecraft) Player720 lost connection: Disconnected
-[23:29:14] [Server thread/INFO] (Minecraft) Player720 left the game
-[23:29:14] [Server thread/INFO] (Minecraft) Stopping singleplayer server as player logged out
-[23:29:14] [Server thread/INFO] (Minecraft) Saving worlds
-[23:29:15] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
-[23:29:17] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
-[23:29:17] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
-[23:29:17] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (world): All chunks are saved
-[23:29:17] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM1): All chunks are saved
-[23:29:17] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
-[23:29:17] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage: All dimensions are saved
-[23:29:22] [Render thread/INFO] (Minecraft) Loaded 1585 recipes
-[23:29:22] [Render thread/INFO] (Minecraft) Loaded 1688 advancements
-[23:29:22] [Render thread/INFO] (BiomeModificationImpl) Applied 0 biome modifications to 0 of 66 new biomes in 516.4 μs
-[23:29:22] [Server thread/INFO] (Minecraft) Starting integrated minecraft server version 26.2
-[23:29:22] [Server thread/INFO] (Minecraft) Generating keypair
-[23:29:22] [Server thread/INFO] (Minecraft) Loading 0 persistent chunks...
-[23:29:22] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
-[23:29:22] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
-[23:29:22] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
-[23:29:22] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (world): All chunks are saved
-[23:29:22] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM1): All chunks are saved
-[23:29:22] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
-[23:29:22] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage: All dimensions are saved
-[23:29:22] [Server thread/INFO] (Minecraft) Loading 49 chunks for player spawn...
-[23:29:22] [Server thread/INFO] (Minecraft) Preparing spawn area: 16%
-[23:29:22] [Server thread/INFO] (Minecraft) Preparing spawn area: 16%
-[23:29:23] [Server thread/INFO] (Minecraft) Preparing spawn area: 16%
-[23:29:23] [Server thread/INFO] (Minecraft) Time elapsed: 1305 ms
-[23:29:23] [Server thread/INFO] (Minecraft) Player720[local:E:764614c9] logged in with entity id 1616 at (-1.524375511764276, 64.0, -20.225831342554777)
-[23:29:23] [Server thread/INFO] (Minecraft) Player720 joined the game
-[23:29:23] [Server thread/INFO] (Minecraft) Changing view distance to 16, from 10
-[23:29:23] [Server thread/INFO] (Minecraft) Changing simulation distance to 12, from 0
-[23:29:23] [Render thread/INFO] (Minecraft) Loaded 2 advancements
-[23:29:24] [Download-3/ERROR] (Minecraft) Failed to retrieve profile key pair
-MinecraftClientHttpException[type=HTTP_ERROR, status=401, response=ErrorResponse[path=/player/certificates, error=null, errorMessage=null, details=null]]
-	at knot//com.mojang.authlib.minecraft.client.MinecraftClient.buildHttpException(MinecraftClient.java:170)
-	at knot//com.mojang.authlib.minecraft.client.MinecraftClient.readServiceResponse(MinecraftClient.java:147)
-	at knot//com.mojang.authlib.minecraft.client.MinecraftClient.post(MinecraftClient.java:89)
-	at knot//com.mojang.authlib.yggdrasil.YggdrasilUserApiService.getKeyPair(YggdrasilUserApiService.java:62)
-	at knot//net.minecraft.client.multiplayer.AccountProfileKeyPairManager.fetchProfileKeyPair(AccountProfileKeyPairManager.java:128)
-	at knot//net.minecraft.client.multiplayer.AccountProfileKeyPairManager.lambda$readOrFetchProfileKeyPair$0(AccountProfileKeyPairManager.java:77)
-	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1789)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
-	at java.base/java.lang.Thread.run(Thread.java:1474)
-[23:29:26] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:26] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:26] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:27] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:27] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:27] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:27] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:27] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:27] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:27] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:27] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:27] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:27] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:27] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:27] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:27] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:27] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:27] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:27] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:27] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:27] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:27] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:27] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:27] [Render thread/INFO] (Minecraft) [System] [CHAT] §7No active Echoes to clear.
-[23:29:28] [Server thread/INFO] (Minecraft) Saving and pausing game...
-[23:29:28] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
-[23:29:28] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
-[23:29:28] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
-[23:29:29] [Server thread/INFO] (Minecraft) Player720 lost connection: Disconnected
-[23:29:29] [Server thread/INFO] (Minecraft) Player720 left the game
-[23:29:29] [Server thread/INFO] (Minecraft) Stopping singleplayer server as player logged out
-[23:29:29] [Server thread/INFO] (Minecraft) Stopping server
-[23:29:29] [Server thread/INFO] (Minecraft) Saving players
-[23:29:29] [Server thread/INFO] (Minecraft) Saving worlds
-[23:29:29] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
-[23:29:31] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
-[23:29:31] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
-[23:29:31] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (world): All chunks are saved
-[23:29:31] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM1): All chunks are saved
-[23:29:31] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
-[23:29:31] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage: All dimensions are saved
-[23:29:35] [Render thread/INFO] (Minecraft) Deleting level New World (1)
-[23:29:35] [Render thread/INFO] (Minecraft) Attempt 1...
-[23:29:37] [Render thread/INFO] (Minecraft) Loaded 1585 recipes
-[23:29:37] [Render thread/INFO] (Minecraft) Loaded 1688 advancements
-[23:29:38] [Render thread/INFO] (BiomeModificationImpl) Applied 0 biome modifications to 0 of 66 new biomes in 366.7 μs
-[23:29:38] [Server thread/INFO] (Minecraft) Starting integrated minecraft server version 26.2
-[23:29:38] [Server thread/INFO] (Minecraft) Generating keypair
-[23:29:38] [Server thread/INFO] (Minecraft) Selecting global world spawn...
-[23:29:40] [Server thread/INFO] (Minecraft) Loading 0 persistent chunks...
-[23:29:40] [Server thread/INFO] (Minecraft) Preparing spawn area: 16%
-[23:29:40] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
-[23:29:40] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
-[23:29:40] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
-[23:29:40] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (world): All chunks are saved
-[23:29:40] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM1): All chunks are saved
-[23:29:40] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
-[23:29:40] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage: All dimensions are saved
-[23:29:40] [Server thread/INFO] (Minecraft) Loading 48 chunks for player spawn...
-[23:29:40] [Server thread/INFO] (Minecraft) Preparing spawn area: 16%
-[23:29:40] [Server thread/INFO] (Minecraft) Preparing spawn area: 16%
-[23:29:40] [Server thread/INFO] (Minecraft) Preparing spawn area: 16%
-[23:29:40] [Server thread/INFO] (Minecraft) Preparing spawn area: 16%
-[23:29:40] [Server thread/INFO] (Minecraft) Preparing spawn area: 16%
-[23:29:41] [Server thread/INFO] (Minecraft) Preparing spawn area: 30%
-[23:29:42] [Server thread/INFO] (Minecraft) Preparing spawn area: 58%
-[23:29:42] [Server thread/INFO] (Minecraft) Time elapsed: 3904 ms
-[23:29:42] [Server thread/INFO] (Minecraft) Player720[local:E:26549a5e] logged in with entity id 1970 at (34.5, 70.0, 48.5)
-[23:29:42] [Server thread/INFO] (Minecraft) Player720 joined the game
-[23:29:42] [Server thread/INFO] (Minecraft) Changing view distance to 16, from 10
-[23:29:42] [Render thread/INFO] (Minecraft) Loaded 2 advancements
-[23:29:42] [Server thread/INFO] (Minecraft) Changing simulation distance to 12, from 0
-[23:29:42] [Download-3/ERROR] (Minecraft) Failed to retrieve profile key pair
-MinecraftClientHttpException[type=HTTP_ERROR, status=401, response=ErrorResponse[path=/player/certificates, error=null, errorMessage=null, details=null]]
-	at knot//com.mojang.authlib.minecraft.client.MinecraftClient.buildHttpException(MinecraftClient.java:170)
-	at knot//com.mojang.authlib.minecraft.client.MinecraftClient.readServiceResponse(MinecraftClient.java:147)
-	at knot//com.mojang.authlib.minecraft.client.MinecraftClient.post(MinecraftClient.java:89)
-	at knot//com.mojang.authlib.yggdrasil.YggdrasilUserApiService.getKeyPair(YggdrasilUserApiService.java:62)
-	at knot//net.minecraft.client.multiplayer.AccountProfileKeyPairManager.fetchProfileKeyPair(AccountProfileKeyPairManager.java:128)
-	at knot//net.minecraft.client.multiplayer.AccountProfileKeyPairManager.lambda$readOrFetchProfileKeyPair$0(AccountProfileKeyPairManager.java:77)
-	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1789)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
-	at java.base/java.lang.Thread.run(Thread.java:1474)
-[23:29:50] [Render thread/INFO] (echoes) Echo recording started.
-[23:29:50] [Render thread/INFO] (Minecraft) [System] [CHAT] §b👁 Echo recording started
-[23:29:57] [Render thread/INFO] (Minecraft) Loaded 20 advancements
-[23:29:57] [Render thread/INFO] (echoes) Echo recording stopped: EchoRecording[snapshots=146, duration=7.3s]
-[23:29:57] [Render thread/INFO] (Minecraft) [System] [CHAT] §b👁 Echo recording saved — 7.3s (146 snapshots)
-[23:29:58] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 Echo summoned (1/3)
-[23:30:23] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 Echo summoned (2/3)
-[23:30:25] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 Echo summoned (3/3)
-[23:30:28] [Render thread/INFO] (Minecraft) [System] [CHAT] §cAlready at the max of 3 Echoes — press H to clear them first.
-[23:30:37] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 All Echoes cleared
-[23:30:38] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 Echo summoned (1/3)
-[23:30:45] [Render thread/INFO] (Minecraft) Loaded 22 advancements
-[23:30:48] [Render thread/INFO] (Minecraft) Resizing Chunk Sections UBO, capacity limit of 1024 reached during a single frame. New capacity will be 2048.
-[23:31:02] [Render thread/INFO] (echoes) Echo recording started.
-[23:31:02] [Render thread/INFO] (Minecraft) [System] [CHAT] §b👁 Echo recording started
-[23:31:10] [Render thread/INFO] (echoes) Echo recording stopped: EchoRecording[snapshots=172, duration=8.6s]
-[23:31:10] [Render thread/INFO] (Minecraft) [System] [CHAT] §b👁 Echo recording saved — 8.6s (172 snapshots)
-[23:31:22] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 Echo summoned (2/3)
-[23:31:52] [Server thread/INFO] (Minecraft) Saving and pausing game...
-[23:31:52] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
-[23:31:52] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
-[23:31:52] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
-[23:31:53] [Server thread/INFO] (Minecraft) Stopping server
-[23:31:53] [Server thread/INFO] (Minecraft) Saving players
-[23:31:53] [Server thread/INFO] (Minecraft) Player720 lost connection: Disconnected
-[23:31:53] [Server thread/INFO] (Minecraft) Player720 left the game
-[23:31:53] [Server thread/INFO] (Minecraft) Stopping singleplayer server as player logged out
-[23:31:53] [Server thread/INFO] (Minecraft) Saving worlds
-[23:31:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
-[23:31:55] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
-[23:31:55] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
-[23:31:55] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (world): All chunks are saved
-[23:31:55] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM1): All chunks are saved
-[23:31:55] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
-[23:31:55] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage: All dimensions are saved
-[23:31:57] [Render thread/INFO] (Minecraft) Stopping!
+[16:18:14] [Render thread/INFO] (Minecraft) Resizing Dynamic Transforms UBO, capacity limit of 8 reached during a single frame. New capacity will be 16.
+[16:18:14] [Render thread/INFO] (Minecraft) Resizing Chunk Sections UBO, capacity limit of 2 reached during a single frame. New capacity will be 4.
+[16:18:14] [Render thread/INFO] (Minecraft) Resizing Chunk Sections UBO, capacity limit of 4 reached during a single frame. New capacity will be 8.
+[16:18:14] [Render thread/INFO] (Minecraft) Resizing Chunk Sections UBO, capacity limit of 8 reached during a single frame. New capacity will be 16.
+[16:18:14] [Render thread/INFO] (Minecraft) Resizing Chunk Sections UBO, capacity limit of 16 reached during a single frame. New capacity will be 32.
+[16:18:14] [Render thread/INFO] (Minecraft) Resizing Chunk Sections UBO, capacity limit of 32 reached during a single frame. New capacity will be 64.
+[16:18:15] [Render thread/INFO] (Minecraft) Resizing Chunk Sections UBO, capacity limit of 64 reached during a single frame. New capacity will be 128.
+[16:18:17] [Render thread/INFO] (Minecraft) Resizing Chunk Sections UBO, capacity limit of 128 reached during a single frame. New capacity will be 256.
+[16:18:20] [Render thread/INFO] (Minecraft) Resizing Chunk Sections UBO, capacity limit of 256 reached during a single frame. New capacity will be 512.
+[16:18:27] [Render thread/INFO] (Minecraft) Resizing Chunk Sections UBO, capacity limit of 512 reached during a single frame. New capacity will be 1024.
+[16:18:32] [Render thread/INFO] (echoes) Echo recording started at BlockPos{x=81, y=70, z=-17}
+[16:18:32] [Render thread/INFO] (Minecraft) [System] [CHAT] §b👁 Echo recording started
+[16:18:38] [Render thread/INFO] (echoes) Echo recording stopped: EchoRecording[snapshots=134, duration=6.7s, actions=3]
+[16:18:38] [Render thread/INFO] (Minecraft) [System] [CHAT] §b👁 Echo recording saved — 6.7s (134 snapshots, 3 actions)
+[16:18:44] [Render thread/INFO] (Minecraft) [System] [CHAT] §d👻 Echo summoned — §fadvancing 3 west per loop §7(6.7s, 3 actions)
+[16:19:20] [Server thread/INFO] (Minecraft) Saving and pausing game...
+[16:19:20] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
+[16:19:21] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
+[16:19:21] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
+[16:19:22] [Server thread/INFO] (Minecraft) Stopping server
+[16:19:22] [Server thread/INFO] (Minecraft) Saving players
+[16:19:22] [Server thread/INFO] (Minecraft) Player86 lost connection: Disconnected
+[16:19:22] [Server thread/INFO] (Minecraft) Player86 left the game
+[16:19:22] [Server thread/INFO] (Minecraft) Stopping singleplayer server as player logged out
+[16:19:22] [Server thread/INFO] (Minecraft) Saving worlds
+[16:19:22] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
+[16:19:23] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
+[16:19:23] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
+[16:19:23] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (world): All chunks are saved
+[16:19:23] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[16:19:23] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[16:19:23] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage: All dimensions are saved
+[16:19:26] [Render thread/INFO] (Minecraft) Stopping!

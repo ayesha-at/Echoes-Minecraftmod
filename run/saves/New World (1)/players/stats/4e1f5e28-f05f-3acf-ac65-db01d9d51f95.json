@@ -1,0 +1,25 @@
+{
+  "stats": {
+    "minecraft:picked_up": {
+      "minecraft:sand": 7,
+      "minecraft:snowball": 7
+    },
+    "minecraft:mined": {
+      "minecraft:sand": 6
+    },
+    "minecraft:used": {
+      "minecraft:snowball": 8
+    },
+    "minecraft:custom": {
+      "minecraft:time_since_rest": 2138,
+      "minecraft:fall_one_cm": 225,
+      "minecraft:walk_one_cm": 7857,
+      "minecraft:total_world_time": 2171,
+      "minecraft:leave_game": 1,
+      "minecraft:play_time": 2138,
+      "minecraft:jump": 10,
+      "minecraft:time_since_death": 2138
+    }
+  },
+  "DataVersion": 4903
+}

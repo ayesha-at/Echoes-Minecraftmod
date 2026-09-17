@@ -11,31 +11,29 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.resources.Identifier;
 
 /**
- * Top-left overlay: recording timer while R is active, and an
- * active-Echo counter (x/3) always visible. Phase 4 HUD requirement.
+ * Top-left overlay: a recording timer while R is active, and an active-Echo
+ * counter (x/3) always visible.
  *
- * Corrected against the actual 26.2 API after the first build attempt
- * failed -- the old HudRenderCallback was removed in 26.1 in favour of
- * HudElementRegistry/VanillaHudElements (confirmed via the official Fabric
- * docs' HudRenderingEntrypoint.java example), GuiGraphics was renamed to
- * GuiGraphicsExtractor, and text drawing now goes through
- * graphics.text(...) with full ARGB colors (alpha channel required, or
- * the text renders transparent) rather than the old drawString(...) with
- * bare RGB.
+ * Corrected against the actual 26.2 API after the first build attempt failed --
+ * HudRenderCallback was removed in 26.1 in favour of HudElementRegistry and
+ * VanillaHudElements, GuiGraphics was renamed to GuiGraphicsExtractor, and text
+ * drawing goes through graphics.text(...) with full ARGB colours (the alpha
+ * channel is required, or the text renders transparent).
  */
 public final class EchoHud {
 
     private static final Identifier LAYER_ID = Identifier.fromNamespaceAndPath("echoes", "hud");
 
     private static final int WHITE = 0xFFFFFFFF;
+    private static final int RECORDING_RED = 0xFFFF5555;
 
     private EchoHud() {
     }
 
     public static void register() {
-        // Attach right before the chat layer, same as the docs example --
-        // this HUD doesn't need to be in front of or behind anything in
-        // particular, so "before chat" is just a reasonable, uncontested spot.
+        // Attached just before the chat layer, same as the docs example -- this
+        // HUD does not need to be in front of or behind anything in particular,
+        // so "before chat" is a reasonable, uncontested spot.
         HudElementRegistry.attachElementBefore(VanillaHudElements.CHAT, LAYER_ID, EchoHud::render);
     }
 
@@ -44,12 +42,10 @@ public final class EchoHud {
         if (client.player == null) {
             return;
         }
-        // NOTE: Options.hideGui (F1) moved in 26.2's GUI/HUD reorg --
-        // confirmed via a community 26.2 port that the replacement is
-        // Gui.hud.isHidden(), reached here as client.gui.hud.isHidden().
-        // This is the one line in this file NOT verified against official
-        // docs (only a changelog note), so it's the one worth double
-        // checking first if this specific line doesn't compile.
+        // NOTE: Options.hideGui (F1) moved in 26.2's GUI/HUD reorg. The
+        // replacement was confirmed only via a community port's changelog, not
+        // official docs, so this is the line worth checking first if it fails
+        // to compile -- everything else in this file is docs-verified.
         if (client.gui.hud.isHidden()) {
             return;
         }
@@ -57,14 +53,17 @@ public final class EchoHud {
         int x = 6;
         int y = 6;
 
-        if (RecordingManager.getInstance().isRecording()) {
-            EchoRecording current = RecordingManager.getInstance().getCurrentRecording();
+        EchoRecording current = RecordingManager.getInstance().getCurrentRecording();
+        // isRecording() and getCurrentRecording() are separate reads of state
+        // the recorder can change between them, so this checks the value it is
+        // about to use rather than a flag that may already be stale.
+        if (RecordingManager.getInstance().isRecording() && current != null) {
             String recText = String.format(
                     "REC %.1fs / %ds",
                     current.getDurationSeconds(),
                     EchoRecording.MAX_SECONDS
             );
-            graphics.text(client.font, recText, x, y, 0xFFFF5555, true);
+            graphics.text(client.font, recText, x, y, RECORDING_RED, true);
             y += 10;
         }
 
