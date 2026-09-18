@@ -1,17 +1,72 @@
-# gradle
+# =========================
+# Gradle
+# =========================
 .gradle/
 build/
-out/
-classes/
 
-# idea
+# Gradle wrapper - keep these tracked
+# gradle/wrapper/gradle-wrapper.jar
+# gradle/wrapper/gradle-wrapper.properties
+
+# =========================
+# IntelliJ IDEA
+# =========================
 .idea/
 *.iml
 *.ipr
 *.iws
+out/
 
-# fabric
+# =========================
+# Eclipse
+# =========================
+.classpath
+.project
+.settings/
+
+# =========================
+# VS Code
+# =========================
+.vscode/
+
+# =========================
+# Minecraft / Fabric
+# =========================
 run/
+logs/
+crash-reports/
 
-# macos
+# =========================
+# Minecraft generated files
+# =========================
+*.log
+*.log.gz
+*.lck
+
+# =========================
+# OS generated files
+# =========================
 .DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# Java
+# =========================
+*.class
+
+# =========================
+# Temporary files
+# =========================
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# =========================
+# Environment / secrets
+# =========================
+.env
+.env.*
+!.env.example
