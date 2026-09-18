@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "echoes",
-  "version": "0.1.0",
+  "version": "${version}",
   "name": "EchoesLab",
   "description": "Record your movement and summon a looping ghost Echo to replay it. Singleplayer, V1.",
   "authors": [
