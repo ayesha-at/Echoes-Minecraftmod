@@ -1,6 +1,6 @@
 <div align="center">
 
-# 👻 EchoesLab
+# 👻 EchoesLab - MinecraftMod
 
 ### *Record yourself. Summon your ghost. Watch it work forever.*
 
