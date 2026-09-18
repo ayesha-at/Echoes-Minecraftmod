@@ -253,7 +253,6 @@ Your recording ended exactly where it started — zero net displacement, so ther
 - [x] CI/CD
 - [ ] Multiplayer support
 - [ ] Persistence across sessions
-- [ ] Echoes that survive world reload
 - [ ] More action types (item use, entity interaction)
 
 ---
@@ -262,7 +261,6 @@ Your recording ended exactly where it started — zero net displacement, so ther
 
 Inspired by the time-echo mechanic from [**Echo Labs**](#), a JS/Canvas puzzle platformer built earlier in this same spirit — EchoesLab is that idea's "what if this were *useful*" sequel.
 
-[`mc-mocap-mod`](https://github.com/mt1006/mc-mocap-mod) was consulted as conceptual reference during early rendering work (LGPL-3.0 — no code was copied; this project is MIT-licensed).
 
 ---
 
